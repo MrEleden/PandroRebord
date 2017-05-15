@@ -14,8 +14,7 @@ from Ihm.env import *
 import sys
 import matplotlib.pyplot as plt
 import pylab as pl
-
-
+import matplotlib.pyplot as plt
 
 frame = Frame()
 if not frame.listRel:
@@ -47,7 +46,7 @@ gf=gestFile(lfile)
 for elem in l:
     p = compare(pol,gf,elem)
     tmp=0
-    nb=10000
+    nb=10
     for i in range(nb):
         print("ITERATION ",i)
         tmp += p.getTimeToFindReward()
@@ -64,5 +63,5 @@ pl.bar(x,y,color='g')
 s="Temps de sélection en msd'un item pour la politique \n %s sur des menus de types différents" %frame.Type[:-4]
 plt.ylabel("Temps de sélection en msd'un item pour la politique \n %s sur des menus de types différents" %frame.Type[:-4])
 plt.savefig('testplot.png')
-Image.open('testplot.png').save('testplot.jpg','JPEG')
+plt.show()
 
