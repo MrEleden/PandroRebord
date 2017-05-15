@@ -16,6 +16,13 @@ import matplotlib.pyplot as plt
 import pylab as pl
 import matplotlib.pyplot as plt
 
+
+#ARGUMENTS
+alpha = 0.01
+gamma = 0.95
+nbIterations = 2000
+tau = 0.5
+
 frame = Frame()
 if not frame.listRel:
     pol = frame.pol
@@ -25,8 +32,8 @@ else:
     gf=gestFile(frame.listRel)
     print(gf.dicOfValue.keys())
     print(gf.dicOfValue)
-    mdp = mdp(8,10,gf,0.95,0.01,2000)
-    [V,pol] = mdp.QLearning(0.5)       
+    mdp = mdp(8,10,gf,gamma,alpha,nbIterations)
+    [V,pol] = mdp.QLearning(tau)       
     keys = list(gf.dicOfValue.keys())
     str1 = ''.join(str(e) for e in keys)
     frame.Type = str1
@@ -60,7 +67,7 @@ y = list(time.values())
 pl.xticks(x, xTicks)
 pl.xticks(range(len(l)), xTicks, rotation=45) 
 pl.bar(x,y,color='g')
-s="Temps de sélection en msd'un item pour la politique \n %s sur des menus de types différents" %frame.Type[:-4]
+s="Temps de sélection en ms d'un item pour la politique \n %s sur des menus de types différents" %frame.Type[:-4]
 plt.ylabel("Temps de sélection en msd'un item pour la politique \n %s sur des menus de types différents" %frame.Type[:-4])
 plt.savefig('testplot.png')
 plt.show()

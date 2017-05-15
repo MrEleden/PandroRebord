@@ -50,6 +50,7 @@ class Frame():
                         print("choix : ",i+1," ",onlyfiles[i])
                     choix = input('\n')
                     choix = choix.split()
+                    print(choix)
                     if(len(choix)>2):
                         print("merci de ne rentrer que une valeur")
                     else:
@@ -74,8 +75,11 @@ class Frame():
                 self.listRel.append("BD/%s" % onlyfiles[int(choix[i])-1])
        elif(self.choix==2):
             print(onlyfiles)
-            self.pol = np.genfromtxt("Policies/%s" % str(onlyfiles[0]))
-            self.Type = str(onlyfiles[0])
+
+            self.pol = np.genfromtxt("Policies/%s" % str(onlyfiles[int(choix[0])-1]))
+            
+            self.Type = str(onlyfiles[int(choix[0])-1])
+            print(self.Type)
        else:
             print("aucun choix valables merci de recommencer")
             
