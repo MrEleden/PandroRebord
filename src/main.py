@@ -13,10 +13,11 @@ from Ihm.frame import *
 
 
 
+
 frame = Frame()
 gf=gestFile(frame.listRel)
 
-mdp = mdp(8,10,gf,0.95,0.01,20)
+mdp = mdp(8,10,gf,0.95,0.01,10000)
 
 
 [V,pol] = mdp.QLearning(0.5)
@@ -28,5 +29,6 @@ np.savetxt(f,V, delimiter=" ", fmt="%s | ")
 f.close()
 
 f = open('Pol.txt', 'wb')
-np.savetxt(f,pol, delimiter=" ", fmt="%s | ") 
+#np.savetxt(f,pol, delimiter=" ", fmt="%s | ") 
+np.savetxt(f,pol)
 f.close()

@@ -19,11 +19,13 @@ from model.reward import Reward
 from model.proba import Proba
 
 
+VALUE = 2
+
 class mdp():
     
     def __init__(self,nbitems,nbactions,gestFile,gamma,alpha,nbIter):
       
-        self.ne=(3**nbitems)
+        self.ne=(VALUE**nbitems)#*nbitems
        
         self.na=nbactions
         self.gf = gestFile
@@ -69,10 +71,11 @@ class mdp():
     def QLearning(self,tau):
         Q = np.zeros((self.ne,self.na))
         #Q = QValues()
-        
+        np.savetxt('dump.txt',Q)
         for i in range(self.nbIter):
             u=0
             self.choix = np.random.randint(len(self.gf.dicOfValue['SemanticMenu'])-1)
+            Q = np.genfromtxt('dump.txt')
             while(u<8):
                  print('iteration ',i)
                  x = np.floor(self.ne*np.random.random())
@@ -80,6 +83,7 @@ class mdp():
                  [y,r] = self.MDPStep(x,u)
                  print("pour l'état ",x,"d'action : ",u,"je vais dans l'état :",y)
                  Q[x,u] = Q[x,u] + self.alpha * (r + self.gamma * Q[y,:].max() - Q[x,u])
+            np.savetxt('dump.txt',Q)
                  
         
         Qmax = Q.max(axis=1)

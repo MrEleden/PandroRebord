@@ -27,13 +27,14 @@ class gestFile(object):
                for j in range(len(value[i])):
                    val = value[i][j]
                    if(val <1):
-                       if val<0.17:
-                           value[i][j]=0.00
-                       elif val<0.52:
-                           value[i][j]=0.33
+                       if val<0.15:
+                           value[i][j]=0.0
+                       elif val<0.50:
+                           value[i][j]=0.3
+                       elif val<0.85:
+                           value[i][j]=0.5
                        else:
-                           value[i][j]=0.66
-                      
+                            value[i][j]=0.7
 
                 
                            
