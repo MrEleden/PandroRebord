@@ -3,11 +3,15 @@
 
 from os import listdir
 from os.path import isfile, join
+import numpy as np
+import sys
 class Frame():
     
    def __init__(self):
        self.choix=0
+       self.pol=[]
        mypath = ''
+       self.listRel=[]
        while(True):
             choix = input("Voulez vous générer une politique choix : 1\nVoulez vous utilisé une politique déja Existante choix : 2\n")
             choix = int(choix)
@@ -17,7 +21,7 @@ class Frame():
                 self.choix=1
                 tmp=True
                 while(tmp):
-                    mypath='../BD/'
+                    mypath='BD/'
                     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
                     print("Veuillez choisir le(s) type(s) de pertinence que vous désirez, pour choisir la 3 et la 4 entrez : 3 4\n")
                     for i in range(len(onlyfiles)):
@@ -33,11 +37,14 @@ class Frame():
                             break
                 break
             elif(choix == 2):
-                self.choix=1
+                self.choix=2
                 tmp=True
                 while(tmp):
-                    mypath='../Policies/'
+                    mypath='Policies/'
                     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+                    if(onlyfiles == []):
+                        print("Pas de politiques disponibles , relancer en choisissant d'en générer une")
+                        sys.exit(0)
                     print("Veuillez choisir la politique que vous désirez, pour choisir la 1 entrez : 1\n")
                     for i in range(len(onlyfiles)):
                         print("choix : ",i+1," ",onlyfiles[i])
@@ -59,14 +66,16 @@ class Frame():
                 break
             else:
                 print("mauvaise valeur saisie recommencer")
+                sys.exit(0)
             
             
        if(self.choix==1):
-            self.listRel=[]
             for i in range(len(choix)):
                 self.listRel.append("BD/%s" % onlyfiles[int(choix[i])-1])
        elif(self.choix==2):
-            pass
+            print(onlyfiles)
+            self.pol = np.genfromtxt("Policies/%s" % str(onlyfiles[0]))
+            self.Type = str(onlyfiles[0])
        else:
             print("aucun choix valables merci de recommencer")
             

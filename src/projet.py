@@ -74,7 +74,7 @@ class mdp():
         #np.savetxt('dump.txt',Q)
         for i in range(self.nbIter):
             u=0
-            self.choix = np.random.randint(len(self.gf.dicOfValue['SemanticMenu'])-1)
+            self.choix = np.random.randint(len(self.gf.dicOfValue[list(self.gf.dicOfValue.keys())[0]])-1)
             #Q = np.genfromtxt('dump.txt')
             while(u<8):
                  print('iteration ',i)
@@ -97,7 +97,7 @@ class mdp():
         if action>7:
             k=7
         print(self.choix,k)
-        if self.gf.dicOfValue['SemanticMenu'][self.choix][k] == 1:
+        if self.gf.dicOfValue[list(self.gf.dicOfValue.keys())[0]][self.choix][k] == 1:
             score = 10000
         value = score - time
         self.r[state,action] = value  
