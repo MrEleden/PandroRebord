@@ -10,12 +10,20 @@ from gestFile import *
 from random import uniform
 import json as simplejson
 from Ihm.frame import *
+import sys
 
 
 
 
 frame = Frame()
 gf=gestFile(frame.listRel)
+pol = np.genfromtxt('pol.txt')
+
+p = compare(pol,gf)
+
+print(p.getTimeToFindReward())
+
+sys.exit(1)
 
 mdp = mdp(8,10,gf,0.95,0.01,2000)
 
@@ -32,3 +40,4 @@ f = open('Pol.txt', 'wb')
 #np.savetxt(f,pol, delimiter=" ", fmt="%s | ") 
 np.savetxt(f,pol)
 f.close()
+
